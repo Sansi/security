@@ -1,11 +1,17 @@
 sudo: false
 language: node_js
 node_js:
-  - 10 # use nodejs v10 LTS
-cache: npm
+  - 22
+cache:
+  directories:
+    - ~/.local/share/pnpm/store
+before_install:
+  - npm install --global pnpm@11.11.0
+install:
+  - pnpm install --frozen-lockfile
 branches:
   only:
-    - master # build master branch only
+    - main
 script:
   - hexo generate # generate static files
 deploy:
